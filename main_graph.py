@@ -19,6 +19,7 @@ class BaseGraph:
     def get_main_df(self):
         df_install_main = pd.read_csv(r'D:\WORK FOLDER\Yaroslav\scripts_python\vizor_task\installs_main.csv')
         df_install_s_2 = pd.read_csv(r'D:\WORK FOLDER\Yaroslav\scripts_python\vizor_task\installs_s2.csv')
+
         df_install_main['install_time'] = pd.to_datetime(df_install_main['install_time'])
         df_install_main['contributor_1_touch_time'] = pd.to_datetime(df_install_main['contributor_1_touch_time'])
         df_install_main['contributor_2_touch_time'] = pd.to_datetime(df_install_main['contributor_2_touch_time'])
@@ -26,6 +27,9 @@ class BaseGraph:
         df_install_main['contributor_2_date'] = pd.to_datetime(df_install_main['contributor_2_touch_time'].dt.date)
         df_install_main['install_date'] = pd.to_datetime(df_install_main['install_time'].dt.date)
         df_install_main['install_year'] = pd.to_datetime(df_install_main['install_time']).dt.year
+        df_install_main['install_hour'] = pd.to_datetime(df_install_main['install_time']).dt.hour
+        df_install_main['contributor_1_hour'] = pd.to_datetime(df_install_main['contributor_1_touch_time']).dt.hour
+        df_install_main['contributor_2_hour'] = pd.to_datetime(df_install_main['contributor_2_touch_time']).dt.hour
         df_install_main['install_day'] = pd.to_datetime(df_install_main['install_time']).dt.day
         df_install_s_2['install_date'] = pd.to_datetime(df_install_s_2['install_date'])
 
@@ -246,6 +250,16 @@ class BaseGraph:
             mode='lines+markers',
             name='installs_main',
             hovertemplate='installs_main: %{y}<br>Date: %{x}<extra></extra>'
+        ))
+
+
+        # installs_main + contr 1
+        fig.add_trace(go.Scatter(
+            x=df_compare['install_date'],
+            y=df_compare['installs_main_pl_comt_1'],
+            mode='lines+markers',
+            name='installs_main + contr 1',
+            hovertemplate='installs_main + contr 1: %{y}<br>Date: %{x}<extra></extra>'
         ))
 
         # Gap
