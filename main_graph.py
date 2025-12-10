@@ -288,6 +288,10 @@ class BaseGraph:
 
     def get_heat_map(self,df_compare):
         fig = px.imshow(df_compare.corr(), text_auto=True)
+        fig.update_layout(
+            width=1000,  # Ширина в пикселях
+            height=800  # Высота в пикселях
+        )
         return fig.show()
 
 

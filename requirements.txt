@@ -4,3 +4,4 @@ plotly
 catboost
 itables
 openpyxl
+scikit-learn
